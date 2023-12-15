@@ -6,13 +6,15 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.gedoor.jarpackage.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <!-- Add your extensions here -->
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.gedoor.jarpackage.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <actions>
+        <action id="JarPackage" class="com.github.gedoor.jarpackage.ui.Action" text="JarPackage"
+                description="JarPackage">
+            <add-to-group group-id="ProjectViewCompileGroup" anchor="after" relative-to-action="Compile"/>
+        </action>
+    </actions>
+
 </idea-plugin>
