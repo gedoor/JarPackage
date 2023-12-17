@@ -1,5 +1,7 @@
 package com.github.gedoor.jarpackage.util
 
+import com.github.gedoor.jarpackage.util.Messages.info
+import com.github.gedoor.jarpackage.util.Messages.notify
 import com.intellij.compiler.CompilerConfiguration
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -13,8 +15,6 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.JavaDirectoryService
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiManager
-import com.github.gedoor.jarpackage.util.Messages.info
-import com.github.gedoor.jarpackage.util.Messages.notify
 import org.jetbrains.org.objectweb.asm.ClassReader
 import org.jetbrains.org.objectweb.asm.ClassVisitor
 import org.jetbrains.org.objectweb.asm.Opcodes

@@ -4,6 +4,9 @@
 //
 package com.github.gedoor.jarpackage.pack.impl
 
+import com.github.gedoor.jarpackage.pack.Packager
+import com.github.gedoor.jarpackage.util.CommonUtils
+import com.github.gedoor.jarpackage.util.Messages
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.actionSystem.LangDataKeys
@@ -13,9 +16,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.JavaDirectoryService
 import com.intellij.psi.PsiManager
-import com.github.gedoor.jarpackage.pack.Packager
-import com.github.gedoor.jarpackage.util.CommonUtils
-import com.github.gedoor.jarpackage.util.Messages
 import java.io.IOException
 import java.nio.file.Path
 

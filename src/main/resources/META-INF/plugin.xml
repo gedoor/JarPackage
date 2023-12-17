@@ -5,14 +5,17 @@
     <vendor>gedoor</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
 
+
     <actions>
-        <action id="JarPackage" class="com.github.gedoor.jarpackage.ui.Action" text="JarPackage"
-                description="JarPackage">
+        <action id="com.github.gedoor.jarpackage.ui.Action"
+                class="com.github.gedoor.jarpackage.ui.Action"
+                text="PackageJar">
             <add-to-group group-id="ProjectViewCompileGroup" anchor="after" relative-to-action="Compile"/>
         </action>
     </actions>
