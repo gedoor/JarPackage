@@ -1,5 +1,6 @@
 package com.github.gedoor.jarpackage.ui
 
+import com.intellij.concurrency.resetThreadContext
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -74,22 +75,24 @@ class Action : AnAction() {
     }
 
     override fun actionPerformed(event: AnActionEvent) {
-        val setting = Settings(event.dataContext)
-        setting.setResizable(false)
-        setting.setSize(500, 200)
-        val screenSize = Toolkit.getDefaultToolkit().screenSize
-        val frameSize = setting.size
-        if (frameSize.height > screenSize.height) {
-            frameSize.height = screenSize.height
-        }
+        resetThreadContext().use {
+            val setting = Settings(event.dataContext)
+            setting.setResizable(false)
+            setting.setSize(500, 200)
+            val screenSize = Toolkit.getDefaultToolkit().screenSize
+            val frameSize = setting.size
+            if (frameSize.height > screenSize.height) {
+                frameSize.height = screenSize.height
+            }
 
-        if (frameSize.width > screenSize.width) {
-            frameSize.width = screenSize.width
-        }
+            if (frameSize.width > screenSize.width) {
+                frameSize.width = screenSize.width
+            }
 
-        setting.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2)
-        setting.setTitle("Package Jars")
-        setting.isVisible = true
+            setting.setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2)
+            setting.setTitle("Package Jars")
+            setting.isVisible = true
+        }
     }
 
     private fun getButtonName(test: String): String {
