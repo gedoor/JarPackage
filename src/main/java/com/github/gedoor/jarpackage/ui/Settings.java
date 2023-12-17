@@ -104,7 +104,7 @@ public class Settings extends JDialog {
             Object exportJarName = properties.get("JAR_" + getPropertyKey());
 
             String jarName = Util.getTheSameStart(names);
-            if (jarName.equals("")) {
+            if (jarName.isEmpty()) {
                 jarName = module.getName();
             }
 
@@ -123,8 +123,8 @@ public class Settings extends JDialog {
             }
             assert exportPath != null;
             this.exportDirectoryField.setText(exportPath.toString());
-        } catch (IOException var12) {
-            var12.printStackTrace();
+        } catch (IOException e) {
+            Messages.error(project, e.toString());
         }
 
     }
@@ -177,17 +177,17 @@ public class Settings extends JDialog {
     }
 
     private String getPropertyKey() {
-        StringBuilder pkey = new StringBuilder("MDL_" + module.getName());
+        StringBuilder pKey = new StringBuilder("MDL_" + module.getName());
 
         for (VirtualFile file : virtualFiles) {
             PsiDirectory psiDirectory = PsiManager.getInstance(project).findDirectory(file);
             if (psiDirectory != null) {
                 PsiPackage psiPackage = JavaDirectoryService.getInstance().getPackage(psiDirectory);
                 assert psiPackage != null;
-                pkey.append("_PKG_").append(psiPackage.getQualifiedName());
+                pKey.append("_PKG_").append(psiPackage.getQualifiedName());
             }
         }
-        return pkey.toString().replace('.', '_');
+        return pKey.toString().replace('.', '_');
     }
 
     private void saveOutPutJarName(String name) {
