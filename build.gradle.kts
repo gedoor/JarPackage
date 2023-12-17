@@ -73,6 +73,10 @@ tasks {
         gradleVersion = properties("gradleVersion").get()
     }
 
+    buildSearchableOptions {
+        enabled = false
+    }
+
     patchPluginXml {
         version = properties("pluginVersion")
         sinceBuild = properties("pluginSinceBuild")
