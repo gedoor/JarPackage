@@ -43,16 +43,17 @@ object CommonUtils {
 
     @JvmStatic
     fun collectExportFilesNest(project: Project, collected: MutableSet<VirtualFile>, parentVf: VirtualFile) {
-        if (!parentVf.isDirectory && !pattern.matcher(parentVf.name).matches()) {
-            collected.add(parentVf)
-        }
-        val vfs = parentVf.children
-        for (child in vfs) {
-            if (child.isDirectory) {
-                collectExportFilesNest(project, collected, child)
-            } else {
-                if (!pattern.matcher(child.name).matches()) {
-                    collected.add(child)
+        if (!parentVf.isDirectory) {
+            if (!pattern.matcher(parentVf.name).matches()) {
+                collected.add(parentVf)
+            }
+        } else {
+            @Suppress("UnsafeVfsRecursion")
+            parentVf.children.forEach {
+                if (it.isDirectory) {
+                    collectExportFilesNest(project, collected, it)
+                } else if (!pattern.matcher(it.name).matches()) {
+                    collected.add(it)
                 }
             }
         }
@@ -176,6 +177,7 @@ object CommonUtils {
     fun findClassNameDefineIn(classes: Array<PsiClass>, javaFile: VirtualFile): Set<String> {
         val localClasses: MutableSet<String> = HashSet()
         for (psiClass in classes) {
+            @Suppress("UnstableApiUsage")
             if (psiClass.sourceElement!!.containingFile.virtualFile == javaFile) {
                 localClasses.add(psiClass.name!!)
             }

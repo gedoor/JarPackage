@@ -9,17 +9,12 @@ import java.nio.file.Path
 /**
  * open the file in system file explorer
  */
-class ActionShowExplorer private constructor(filePath: Path) : AnAction(Constants.actionNameExplorer) {
-    private val filePath: Path?
-
-    init {
-        this.filePath = filePath
-    }
+class ActionShowExplorer(private val filePath: Path) : AnAction(Constants.actionNameExplorer) {
 
     override fun actionPerformed(e: AnActionEvent) {
-        if (filePath != null && !Files.isDirectory(filePath)) {
+        if (!Files.isDirectory(filePath)) {
             RevealFileAction.openFile(filePath.toFile())
-        } else if (filePath != null) {
+        } else {
             RevealFileAction.openDirectory(filePath.toFile())
         }
     }
