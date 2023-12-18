@@ -75,6 +75,7 @@ class Action : AnAction() {
     }
 
     override fun actionPerformed(event: AnActionEvent) {
+        @Suppress("UnstableApiUsage")
         resetThreadContext().use {
             val setting = Settings(event.dataContext)
             setting.setResizable(false)
