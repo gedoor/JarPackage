@@ -4,10 +4,6 @@
     <name>JarPackage</name>
     <vendor url="https://github.com/gedoor/JarPackage">gedoor</vendor>
 
-    <description><![CDATA[
-      * Use the right click on the package click [Package 'xxxx']to generate the jar
-    ]]></description>
-
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
 
