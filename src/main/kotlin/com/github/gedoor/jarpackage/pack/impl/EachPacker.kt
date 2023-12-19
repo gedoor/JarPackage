@@ -22,10 +22,11 @@ import java.io.IOException
 import java.nio.file.Path
 
 class EachPacker(dataContext: DataContext, private val exportPath: String) : Packager() {
-    private val project: Project = CommonDataKeys.PROJECT.getData(dataContext)!!
-    private val virtualFiles: Array<VirtualFile> = CommonDataKeys.VIRTUAL_FILE_ARRAY.getData(dataContext)!!
+
+    private val project: Project = dataContext.getData(CommonDataKeys.PROJECT)!!
+    private val virtualFiles: Array<VirtualFile> = dataContext.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY)!!
     private val outPutDir: VirtualFile =
-        CompilerPaths.getModuleOutputDirectory(LangDataKeys.MODULE.getData(dataContext)!!, false)!!
+        CompilerPaths.getModuleOutputDirectory(dataContext.getData(LangDataKeys.MODULE)!!, false)!!
 
     @Throws(Exception::class)
     override fun pack() {
