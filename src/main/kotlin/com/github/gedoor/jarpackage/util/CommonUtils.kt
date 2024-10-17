@@ -84,7 +84,7 @@ object CommonUtils {
                                 jos.write(Files.readAllBytes(filePath))
                             }
                             jos.closeEntry()
-                            info(project, "packed $filePath")
+                            info(project, "packed $entryName")
                         }
                         info(project, "packageJar success $jarFileFullPath")
                         notify(
