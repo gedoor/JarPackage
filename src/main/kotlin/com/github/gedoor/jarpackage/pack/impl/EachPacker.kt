@@ -53,12 +53,13 @@ class EachPacker(dataContext: DataContext, private val exportPath: String) : Pac
             for (n in packageNames) {
                 pvf = pvf.findChild(n) ?: throw IOException("$n 文件夹不存在")
             }
-            val allVfs: MutableSet<VirtualFile> = HashSet()
+            val allVfs = HashSet<VirtualFile>()
             CommonUtils.collectExportFilesNest(project, allVfs, pvf)
             val filePaths: MutableList<Path> = ArrayList()
             val jarEntryNames: MutableList<String> = ArrayList()
             val outIndex = outPutDir.path.length + 1
-            for (vf in allVfs) {
+            val vfList = allVfs.sortedBy { it.path }
+            for (vf in vfList) {
                 filePaths.add(vf.toNioPath())
                 jarEntryNames.add(vf.path.substring(outIndex))
             }

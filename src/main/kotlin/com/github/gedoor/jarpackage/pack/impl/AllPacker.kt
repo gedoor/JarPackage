@@ -32,7 +32,7 @@ class AllPacker(
 
     @Throws(Exception::class)
     override fun pack() {
-        val allVfs: MutableSet<VirtualFile> = HashSet()
+        val allVfs = HashSet<VirtualFile>()
         for (virtualFile in virtualFiles) {
             val psiDirectory = PsiManager.getInstance(project).findDirectory(virtualFile)
             if (psiDirectory != null) {
@@ -51,7 +51,8 @@ class AllPacker(
         val filePaths: MutableList<Path> = ArrayList()
         val jarEntryNames: MutableList<String> = ArrayList()
         val outIndex = outPutDir.path.length + 1
-        for (vf in allVfs) {
+        val vfsList = allVfs.sortedBy { it.path }
+        for (vf in vfsList) {
             filePaths.add(vf.toNioPath())
             jarEntryNames.add(vf.path.substring(outIndex))
         }

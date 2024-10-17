@@ -22,6 +22,8 @@ import java.io.BufferedOutputStream
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.jar.Attributes
 import java.util.jar.JarEntry
 import java.util.jar.JarOutputStream
@@ -69,7 +71,8 @@ object CommonUtils {
             Files.newOutputStream(jarFileFullPath).use { os ->
                 BufferedOutputStream(os).use { bos ->
                     JarOutputStream(bos, manifest).use { jos ->
-                        info(project!!, "start package $jarFileFullPath")
+                        val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+                        info(project!!, "start package $jarFileFullPath at ${dateFormat.format(Date())}")
                         for (i in entryNames.indices) {
                             val entryName = entryNames[i]
                             val je = JarEntry(entryName)
